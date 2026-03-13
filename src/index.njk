@@ -1,0 +1,13 @@
+---
+layout: base.njk
+title: 作品一覧
+showHomeLink: false
+---
+
+<h1>作品一覧</h1>
+
+<ul class="work-list">
+  {% for work in works %}
+    <li><a href="/works/{{ work.slug }}/">{{ work.name }}</a></li>
+  {% endfor %}
+</ul>

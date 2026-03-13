@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% if title %}{{ title }} | {% endif %}{{ site.name }}</title>
+  <link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+  <main class="wrap">
+    {% if showHomeLink != false %}
+      <p class="home-link"><a href="/">← 作品一覧へ</a></p>
+    {% endif %}
+    {{ content | safe }}
+  </main>
+</body>
+</html>

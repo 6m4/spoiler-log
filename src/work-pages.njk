@@ -1,0 +1,48 @@
+---
+layout: base.njk
+pagination:
+  data: collections.workPageDefs
+  size: 1
+  alias: pageDef
+permalink: "{{ pageDef.permalink }}"
+---
+
+{% set title = pageDef.name %}
+{% set allPosts = collections["work_" ~ pageDef.slug] %}
+{% set posts = allPosts.slice(pageDef.start, pageDef.end) %}
+
+<h1>{{ pageDef.name }}</h1>
+
+{% for post in posts %}
+  <article class="post">
+    {{ post.templateContent | safe }}
+    <time datetime="{{ post.date.toISOString() }}">
+      {{ post.date.toLocaleString("ja-JP", {
+        year: "numeric",
+        month: "numeric",
+        day: "numeric",
+        hour: "2-digit",
+        minute: "2-digit",
+        hourCycle: "h23"
+      }) }}
+    </time>
+  </article>
+{% endfor %}
+
+<nav class="pager">
+  {% if pageDef.pageNumber > 1 %}
+    {% if pageDef.pageNumber == 2 %}
+      <a href="/works/{{ pageDef.slug }}/">← 前のページ</a>
+    {% else %}
+      <a href="/works/{{ pageDef.slug }}/page/{{ pageDef.pageNumber - 1 }}/">← 前のページ</a>
+    {% endif %}
+  {% else %}
+    <span class="hidden">← 前のページ</span>
+  {% endif %}
+
+  {% if pageDef.pageNumber < pageDef.totalPages %}
+    <a href="/works/{{ pageDef.slug }}/page/{{ pageDef.pageNumber + 1 }}/">次のページ →</a>
+  {% else %}
+    <span class="hidden">次のページ →</span>
+  {% endif %}
+</nav>

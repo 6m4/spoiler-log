@@ -1,0 +1,110 @@
+const works = require("./src/_data/works.json");
+
+function getYouTubeId(url) {
+  try {
+    const u = new URL(url);
+
+    if (u.hostname === "youtu.be") {
+      return u.pathname.slice(1);
+    }
+
+    if (u.hostname.includes("youtube.com")) {
+      if (u.pathname === "/watch") {
+        return u.searchParams.get("v");
+      }
+
+      if (u.pathname.startsWith("/embed/")) {
+        return u.pathname.split("/embed/")[1];
+      }
+
+      if (u.pathname.startsWith("/shorts/")) {
+        return u.pathname.split("/shorts/")[1];
+      }
+    }
+  } catch (e) {
+    return null;
+  }
+
+  return null;
+}
+
+module.exports = function (eleventyConfig) {
+  eleventyConfig.addPassthroughCopy({ "src/assets": "assets" });
+  eleventyConfig.addPassthroughCopy({ "src/images": "images" });
+
+  eleventyConfig.addShortcode("youtube", function (url) {
+    const id = getYouTubeId(url);
+
+    if (!id) {
+      return `<p>YouTube URL error: ${url}</p>`;
+    }
+
+    return `
+      <div class="video-wrap">
+        <iframe
+          src="https://www.youtube.com/embed/${id}"
+          title="YouTube video player"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen>
+        </iframe>
+      </div>
+    `;
+  });
+
+  eleventyConfig.addCollection("posts", function (collectionApi) {
+    return collectionApi
+      .getFilteredByTag("posts")
+      .slice()
+      .sort((a, b) => new Date(b.date) - new Date(a.date));
+  });
+
+  for (const work of works) {
+    eleventyConfig.addCollection(`work_${work.slug}`, function (collectionApi) {
+      return collectionApi
+        .getFilteredByTag("posts")
+        .filter((item) => item.data.work === work.slug)
+        .slice()
+        .sort((a, b) => new Date(b.date) - new Date(a.date));
+    });
+  }
+
+  eleventyConfig.addCollection("workPageDefs", function (collectionApi) {
+    const defs = [];
+
+    for (const work of works) {
+      const items = collectionApi
+        .getFilteredByTag("posts")
+        .filter((item) => item.data.work === work.slug)
+        .slice()
+        .sort((a, b) => new Date(b.date) - new Date(a.date));
+
+      const totalPages = Math.max(1, Math.ceil(items.length / 30));
+
+      for (let page = 1; page <= totalPages; page++) {
+        defs.push({
+          slug: work.slug,
+          name: work.name,
+          pageNumber: page,
+          totalPages,
+          start: (page - 1) * 30,
+          end: page * 30,
+          permalink:
+            page === 1
+              ? `/works/${work.slug}/index.html`
+              : `/works/${work.slug}/page/${page}/index.html`,
+        });
+      }
+    }
+
+    return defs;
+  });
+
+  return {
+    dir: {
+      input: "src",
+      includes: "_includes",
+      data: "_data",
+      output: "_site"
+    }
+  };
+};
