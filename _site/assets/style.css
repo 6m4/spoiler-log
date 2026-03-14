@@ -103,7 +103,7 @@ a {
 }
 
 .post::before {
-  content: "-";
+  content: "•";
   position: absolute;
   left: 0;
   top: 0.05em;
