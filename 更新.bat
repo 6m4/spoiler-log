@@ -14,7 +14,7 @@ if errorlevel 1 goto :error
 
 echo.
 echo === git commit ===
-git commit -m "ポスト追加"
+git commit -m "post add"
 if errorlevel 1 goto :error
 
 echo.
@@ -23,12 +23,12 @@ git push
 if errorlevel 1 goto :error
 
 echo.
-echo 完了しました
+echo Done
 pause
 exit /b
 
 :error
 echo.
-echo エラーが発生しました
+echo Error
 pause
 exit /b 1
