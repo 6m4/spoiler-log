@@ -7,7 +7,23 @@ showHomeLink: false
 <h1>作品一覧</h1>
 
 <ul class="work-list">
-  {% for work in works %}
-    <li><a href="{{ ('/works/' ~ work.slug ~ '/') | url }}">{{ work.name }}</a></li>
+  {% for work in collections.workSummaries %}
+    <li>
+      <a href="{{ ('/works/' ~ work.slug ~ '/') | url }}">
+        <span class="work-main">
+          <strong>{{ work.name }}</strong>
+          <span class="work-meta">
+            {% if work.count > 0 %}
+              {{ work.count }}件 ・ 最終更新
+              <time datetime="{{ work.latestPost.date.toISOString() }}">
+                {{ work.latestPost.date.toLocaleDateString("ja-JP") }}
+              </time>
+            {% else %}
+              まだ投稿なし
+            {% endif %}
+          </span>
+        </span>
+      </a>
+    </li>
   {% endfor %}
 </ul>

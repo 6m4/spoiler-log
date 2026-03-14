@@ -32,7 +32,7 @@ function getYouTubeId(url) {
 module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy({ "src/assets": "assets" });
   eleventyConfig.addPassthroughCopy({ "src/images": "images" });
-  
+
   eleventyConfig.amendLibrary("md", (mdLib) => {
     const defaultImageRenderer =
       mdLib.renderer.rules.image ||
@@ -47,7 +47,6 @@ module.exports = function (eleventyConfig) {
       if (srcIndex >= 0) {
         const src = token.attrs[srcIndex][1];
 
-        // /images/... で始まるローカル画像だけ pathPrefix を付ける
         if (src.startsWith("/images/")) {
           token.attrs[srcIndex][1] = `${pathPrefix.replace(/\/$/, "")}${src}`;
         }
@@ -122,6 +121,28 @@ module.exports = function (eleventyConfig) {
     }
 
     return defs;
+  });
+
+  eleventyConfig.addCollection("workSummaries", function (collectionApi) {
+    return works
+      .map((work) => {
+        const posts = collectionApi
+          .getFilteredByTag("posts")
+          .filter((item) => item.data.work === work.slug)
+          .slice()
+          .sort((a, b) => new Date(b.date) - new Date(a.date));
+
+        return {
+          ...work,
+          count: posts.length,
+          latestPost: posts[0] || null,
+        };
+      })
+      .sort((a, b) => {
+        const aTime = a.latestPost ? new Date(a.latestPost.date).getTime() : 0;
+        const bTime = b.latestPost ? new Date(b.latestPost.date).getTime() : 0;
+        return bTime - aTime;
+      });
   });
 
   return {
