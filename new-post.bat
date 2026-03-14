@@ -22,4 +22,3 @@ echo {%% youtube "https://www.youtube.com/watch?v=xxxxxxxxxxx" %%}
 ) > "%FILE%"
 
 echo Created: %FILE%
-pause
