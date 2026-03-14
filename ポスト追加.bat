@@ -26,7 +26,11 @@ echo Write here.
 echo.
 echo ^![](/images/%BASENAME%.jpg^)
 echo.
-echo {%% youtube "https://www.youtube.com/watch?v=xxxxxxxxxxx" %%}
+echo ^<!-- {%% youtube "https://www.youtube.com/watch?v=xxxxxxxxxxx" %%} --^>
 ) > "%FILE%"
 
+if not exist "%~dp0src\images" mkdir "%~dp0src\images"
+
 echo Created: %FILE%
+start "" "%FILE%"
+start "" "%~dp0src\images"
