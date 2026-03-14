@@ -89,6 +89,19 @@ a {
   border-bottom: 1px solid #e5e5e5;
 }
 
+.post:first-of-type {
+  margin-top: 24px;
+}
+
+.post:first-of-type::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -24px;
+  border-top: 1px solid #e5e5e5;
+}
+
 .post::before {
   content: "-";
   position: absolute;
