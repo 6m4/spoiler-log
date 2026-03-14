@@ -14,5 +14,44 @@
     {% endif %}
     {{ content | safe }}
   </main>
+
+  <div id="lightbox" class="lightbox" hidden>
+    <button id="lightbox-close" class="lightbox-close" aria-label="閉じる">×</button>
+    <img id="lightbox-image" class="lightbox-image" src="" alt="">
+  </div>
+
+  <script>
+    document.addEventListener("click", function (e) {
+      const img = e.target.closest(".post img");
+      if (!img) return;
+
+      const lightbox = document.getElementById("lightbox");
+      const lightboxImage = document.getElementById("lightbox-image");
+
+      lightboxImage.src = img.src;
+      lightboxImage.alt = img.alt || "";
+      lightbox.hidden = false;
+      document.body.style.overflow = "hidden";
+    });
+
+    document.getElementById("lightbox-close").addEventListener("click", closeLightbox);
+
+    document.getElementById("lightbox").addEventListener("click", function (e) {
+      if (e.target.id === "lightbox") closeLightbox();
+    });
+
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape") closeLightbox();
+    });
+
+    function closeLightbox() {
+      const lightbox = document.getElementById("lightbox");
+      const lightboxImage = document.getElementById("lightbox-image");
+
+      lightbox.hidden = true;
+      lightboxImage.src = "";
+      document.body.style.overflow = "";
+    }
+  </script>
 </body>
 </html>
