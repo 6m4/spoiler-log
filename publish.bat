@@ -3,15 +3,22 @@ setlocal
 
 cd /d "%~dp0"
 
-npm.cmd run build
+echo === npm build ===
+call npm.cmd run build
 if errorlevel 1 goto :error
 
+echo.
+echo === git add ===
 git add .
 if errorlevel 1 goto :error
 
+echo.
+echo === git commit ===
 git commit -m "ポスト追加"
 if errorlevel 1 goto :error
 
+echo.
+echo === git push ===
 git push
 if errorlevel 1 goto :error
 
