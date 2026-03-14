@@ -25,7 +25,7 @@ h1 {
   display: flex;
   gap: 12px;
   flex-wrap: wrap;
-  margin: -8px 0 20px;
+  margin: -8px 0 50px;
   color: #666;
   font-size: 0.95rem;
 }
