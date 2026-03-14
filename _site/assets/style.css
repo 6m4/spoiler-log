@@ -221,3 +221,10 @@ a {
   text-align: center;
   letter-spacing: 0.02em;
 }
+
+.page-kicker {
+  margin: 0 0 6px;
+  color: #666;
+  font-size: 0.85rem;
+  line-height: 1.4;
+}
