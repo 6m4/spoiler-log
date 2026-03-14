@@ -218,4 +218,6 @@ a {
   color: #8a3b12;
   font-size: 0.95rem;
   font-weight: 600;
+  text-align: center;
+  letter-spacing: 0.02em;
 }
