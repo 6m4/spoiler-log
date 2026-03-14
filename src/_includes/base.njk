@@ -5,12 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="noindex, nofollow">
   <title>{% if title %}{{ title }} | {% endif %}{{ site.name }}</title>
-  <link rel="stylesheet" href="/assets/style.css">
+  <link rel="stylesheet" href="{{ '/assets/style.css' | url }}">
 </head>
 <body>
   <main class="wrap">
     {% if showHomeLink != false %}
-      <p class="home-link"><a href="/">← 作品一覧へ</a></p>
+      <p class="home-link"><a href="{{ '/' | url }}">← 作品一覧へ</a></p>
     {% endif %}
     {{ content | safe }}
   </main>

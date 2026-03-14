@@ -90,8 +90,8 @@ module.exports = function (eleventyConfig) {
           end: page * 30,
           permalink:
             page === 1
-              ? `/works/${work.slug}/index.html`
-              : `/works/${work.slug}/page/${page}/index.html`,
+              ? `/works/${work.slug}/`
+              : `/works/${work.slug}/page/${page}/`,
         });
       }
     }
@@ -105,6 +105,7 @@ module.exports = function (eleventyConfig) {
       includes: "_includes",
       data: "_data",
       output: "_site"
-    }
+    },
+    pathPrefix: "/spoiler-log/"
   };
 };

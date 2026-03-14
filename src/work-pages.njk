@@ -32,16 +32,16 @@ permalink: "{{ pageDef.permalink }}"
 <nav class="pager">
   {% if pageDef.pageNumber > 1 %}
     {% if pageDef.pageNumber == 2 %}
-      <a href="/works/{{ pageDef.slug }}/">← 前のページ</a>
+      <a href="{{ ('/works/' ~ pageDef.slug ~ '/') | url }}">← 前のページ</a>
     {% else %}
-      <a href="/works/{{ pageDef.slug }}/page/{{ pageDef.pageNumber - 1 }}/">← 前のページ</a>
+      <a href="{{ ('/works/' ~ pageDef.slug ~ '/page/' ~ (pageDef.pageNumber - 1) ~ '/') | url }}">← 前のページ</a>
     {% endif %}
   {% else %}
     <span class="hidden">← 前のページ</span>
   {% endif %}
 
   {% if pageDef.pageNumber < pageDef.totalPages %}
-    <a href="/works/{{ pageDef.slug }}/page/{{ pageDef.pageNumber + 1 }}/">次のページ →</a>
+    <a href="{{ ('/works/' ~ pageDef.slug ~ '/page/' ~ (pageDef.pageNumber + 1) ~ '/') | url }}">次のページ →</a>
   {% else %}
     <span class="hidden">次のページ →</span>
   {% endif %}

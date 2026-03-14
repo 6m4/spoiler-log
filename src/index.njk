@@ -8,6 +8,6 @@ showHomeLink: false
 
 <ul class="work-list">
   {% for work in works %}
-    <li><a href="/works/{{ work.slug }}/">{{ work.name }}</a></li>
+    <li><a href="{{ ('/works/' ~ work.slug ~ '/') | url }}">{{ work.name }}</a></li>
   {% endfor %}
 </ul>
