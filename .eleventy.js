@@ -1,4 +1,5 @@
 const works = require("./src/_data/works.json");
+const pathPrefix = "/spoiler-log/";
 
 function getYouTubeId(url) {
   try {
@@ -31,6 +32,30 @@ function getYouTubeId(url) {
 module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy({ "src/assets": "assets" });
   eleventyConfig.addPassthroughCopy({ "src/images": "images" });
+  
+  eleventyConfig.amendLibrary("md", (mdLib) => {
+    const defaultImageRenderer =
+      mdLib.renderer.rules.image ||
+      function (tokens, idx, options, env, self) {
+        return self.renderToken(tokens, idx, options);
+      };
+
+    mdLib.renderer.rules.image = function (tokens, idx, options, env, self) {
+      const token = tokens[idx];
+      const srcIndex = token.attrIndex("src");
+
+      if (srcIndex >= 0) {
+        const src = token.attrs[srcIndex][1];
+
+        // /images/... で始まるローカル画像だけ pathPrefix を付ける
+        if (src.startsWith("/images/")) {
+          token.attrs[srcIndex][1] = `${pathPrefix.replace(/\/$/, "")}${src}`;
+        }
+      }
+
+      return defaultImageRenderer(tokens, idx, options, env, self);
+    };
+  });
 
   eleventyConfig.addShortcode("youtube", function (url) {
     const id = getYouTubeId(url);
@@ -106,6 +131,6 @@ module.exports = function (eleventyConfig) {
       data: "_data",
       output: "_site"
     },
-    pathPrefix: "/spoiler-log/"
+    pathPrefix: pathPrefix
   };
 };
