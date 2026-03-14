@@ -7,27 +7,41 @@ pagination:
 permalink: "{{ pageDef.permalink }}"
 ---
 
-{% set title = pageDef.name %}
 {% set allPosts = collections["work_" ~ pageDef.slug] %}
 {% set posts = allPosts.slice(pageDef.start, pageDef.end) %}
 
+{% if pageDef.pageNumber > 1 %}
+  {% set title = pageDef.name ~ " - " ~ pageDef.pageNumber ~ "ページ目" %}
+{% else %}
+  {% set title = pageDef.name %}
+{% endif %}
+
 <h1>{{ pageDef.name }}</h1>
 
-{% for post in posts %}
-  <article class="post">
-    {{ post.templateContent | safe }}
-    <time datetime="{{ post.date.toISOString() }}">
-      {{ post.date.toLocaleString("ja-JP", {
-        year: "numeric",
-        month: "numeric",
-        day: "numeric",
-        hour: "2-digit",
-        minute: "2-digit",
-        hourCycle: "h23"
-      }) }}
-    </time>
-  </article>
-{% endfor %}
+<div class="work-summary">
+  <span>{{ allPosts.length }}件</span>
+  <span>{{ pageDef.pageNumber }} / {{ pageDef.totalPages }}ページ</span>
+</div>
+
+{% if posts.length > 0 %}
+  {% for post in posts %}
+    <article class="post">
+      {{ post.templateContent | safe }}
+      <time datetime="{{ post.date.toISOString() }}">
+        {{ post.date.toLocaleString("ja-JP", {
+          year: "numeric",
+          month: "numeric",
+          day: "numeric",
+          hour: "2-digit",
+          minute: "2-digit",
+          hourCycle: "h23"
+        }) }}
+      </time>
+    </article>
+  {% endfor %}
+{% else %}
+  <p>まだ投稿はありません。</p>
+{% endif %}
 
 <nav class="pager">
   {% if pageDef.pageNumber > 1 %}
@@ -39,6 +53,8 @@ permalink: "{{ pageDef.permalink }}"
   {% else %}
     <span class="hidden">← 前のページ</span>
   {% endif %}
+
+  <span class="pager-current">{{ pageDef.pageNumber }} / {{ pageDef.totalPages }}</span>
 
   {% if pageDef.pageNumber < pageDef.totalPages %}
     <a href="{{ ('/works/' ~ pageDef.slug ~ '/page/' ~ (pageDef.pageNumber + 1) ~ '/') | url }}">次のページ →</a>
