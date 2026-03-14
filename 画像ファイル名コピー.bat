@@ -1,2 +1,0 @@
-@echo off
-powershell -NoProfile -ExecutionPolicy Bypass -Command "$tz=[System.TimeZoneInfo]::FindSystemTimeZoneById('Tokyo Standard Time'); $now=[System.TimeZoneInfo]::ConvertTimeFromUtc([datetime]::UtcNow,$tz); $name=$now.ToString('yyyy-MM-dd-HHmmss'); $text='![](/images/' + $name + '.jpg)'; Set-Clipboard -Value $text"
