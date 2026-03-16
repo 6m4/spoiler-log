@@ -17,7 +17,9 @@ showHomeLink: false
             {% if work.count > 0 %}
               {{ work.count }}件 ・ 最終更新
               <time datetime="{{ work.latestPost.date.toISOString() }}">
-                {{ work.latestPost.date.toLocaleDateString("ja-JP") }}
+                {{ work.latestPost.date.toLocaleDateString("ja-JP", {
+                  timeZone: "Asia/Tokyo"
+                }) }}
               </time>
             {% else %}
               まだ投稿なし

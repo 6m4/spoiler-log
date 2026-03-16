@@ -31,6 +31,7 @@ permalink: "{{ pageDef.permalink }}"
       {{ post.templateContent | safe }}
       <time datetime="{{ post.date.toISOString() }}">
         {{ post.date.toLocaleString("ja-JP", {
+          timeZone: "Asia/Tokyo",
           year: "numeric",
           month: "numeric",
           day: "numeric",
