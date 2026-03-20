@@ -3,7 +3,7 @@ setlocal
 
 rem 投稿先の作品slugをここだけ変える
 rem 作品追加はD:\ネタバレ保管庫\src\_data\works.jsonを修正
-set "WORK_SLUG=paranomaise"
+set "WORK_SLUG=livealive"
 
 for /f "delims=" %%i in ('powershell -NoProfile -ExecutionPolicy Bypass -Command "([DateTimeOffset]::Now).ToString('yyyy-MM-ddTHH:mm:sszzz')"') do set "DATETEXT=%%i"
 for /f "delims=" %%i in ('powershell -NoProfile -ExecutionPolicy Bypass -Command "(Get-Date).ToString('yyyy-MM-dd-HHmmss')"') do set "STAMP=%%i"
