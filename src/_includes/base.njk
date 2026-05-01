@@ -4,7 +4,25 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="noindex, nofollow">
-  <title>{% if title %}{{ title }} | {% endif %}{{ site.name }}</title>
+  {% set pageTitle %}{% if title %}{{ title }}{% elif work %}{{ work | workName }}{% else %}{{ site.name }}{% endif %}{% endset %}
+  {% set cardTitle %}{% if work %}ネタバレ注意 | {{ work | workName }}{% else %}{{ pageTitle }}{% endif %}{% endset %}
+  {% set cardDescription = "食べ食べのネタバレツイート置き場" %}
+  {% set cardImage = "" %}
+  {% if work %}
+    {% set cardImage = work | workCardImage %}
+  {% endif %}
+  <title>{% if pageTitle != site.name %}{{ pageTitle }} | {% endif %}{{ site.name }}</title>
+  <meta property="og:title" content="{{ cardTitle | trim }}">
+  <meta property="og:description" content="{{ cardDescription }}">
+  <meta property="og:type" content="{% if work %}article{% else %}website{% endif %}">
+  <meta property="og:url" content="{{ page.url | absoluteUrl(site) }}">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="{{ cardTitle | trim }}">
+  <meta name="twitter:description" content="{{ cardDescription }}">
+  {% if cardImage %}
+    <meta property="og:image" content="{{ cardImage | absoluteUrl(site) }}">
+    <meta name="twitter:image" content="{{ cardImage | absoluteUrl(site) }}">
+  {% endif %}
   <link rel="stylesheet" href="{{ '/assets/style.css' | url }}">
 </head>
 <body>
@@ -42,6 +60,27 @@
 
     document.addEventListener("keydown", function (e) {
       if (e.key === "Escape") closeLightbox();
+    });
+
+    const spoilerGateStorageKey = "spoiler-log-gate-open";
+
+    document.querySelectorAll("[data-spoiler-gate]").forEach(function (gate) {
+      try {
+        if (sessionStorage.getItem(spoilerGateStorageKey) === "true") {
+          gate.classList.add("is-open");
+        }
+      } catch (e) {}
+
+      const button = gate.querySelector(".spoiler-open-button");
+      if (!button) return;
+
+      button.addEventListener("click", function () {
+        gate.classList.add("is-open");
+
+        try {
+          sessionStorage.setItem(spoilerGateStorageKey, "true");
+        } catch (e) {}
+      });
     });
 
     function closeLightbox() {

@@ -29,6 +29,25 @@ function getYouTubeId(url) {
   return null;
 }
 
+function getPostId(post) {
+  const inputPath = post?.inputPath || post?.page?.inputPath || post?.data?.page?.inputPath;
+
+  if (inputPath) {
+    return inputPath
+      .split(/[\\/]/)
+      .pop()
+      .replace(/\.[^.]+$/, "");
+  }
+
+  return post?.fileSlug || post?.page?.fileSlug || post?.data?.page?.fileSlug || "";
+}
+
+function getWorkPageUrl(workSlug, pageNumber) {
+  return pageNumber === 1
+    ? `/works/${workSlug}/`
+    : `/works/${workSlug}/page/${pageNumber}/`;
+}
+
 module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy({ "src/assets": "assets" });
   eleventyConfig.addPassthroughCopy({ "src/images": "images" });
@@ -73,6 +92,46 @@ module.exports = function (eleventyConfig) {
         </iframe>
       </div>
     `;
+  });
+
+  eleventyConfig.addFilter("postAnchor", function (post) {
+    return `post-${getPostId(post)}`;
+  });
+
+  eleventyConfig.addFilter("postUrl", function (post) {
+    return `/works/${post.data.work}/posts/${getPostId(post)}/`;
+  });
+
+  eleventyConfig.addFilter("workName", function (workSlug) {
+    const work = works.find((item) => item.slug === workSlug);
+    return work ? work.name : workSlug;
+  });
+
+  eleventyConfig.addFilter("workCardImage", function (workSlug) {
+    const work = works.find((item) => item.slug === workSlug);
+    return work?.cardImage || "";
+  });
+
+  eleventyConfig.addFilter("absoluteUrl", function (url, site) {
+    const normalizedUrl = url || "/";
+    const prefixedUrl = normalizedUrl.startsWith(pathPrefix)
+      ? normalizedUrl
+      : `${pathPrefix.replace(/\/$/, "")}${normalizedUrl.startsWith("/") ? "" : "/"}${normalizedUrl}`;
+
+    if (!site?.url) {
+      return prefixedUrl;
+    }
+
+    return `${site.url.replace(/\/$/, "")}${prefixedUrl}`;
+  });
+
+  eleventyConfig.addFilter("postBackUrl", function (post, workSlug, collections) {
+    const postId = getPostId(post);
+    const posts = collections[`work_${workSlug}`] || [];
+    const index = posts.findIndex((item) => getPostId(item) === postId);
+    const pageNumber = index >= 0 ? Math.floor(index / 30) + 1 : 1;
+
+    return `${getWorkPageUrl(workSlug, pageNumber)}#post-${postId}`;
   });
 
   eleventyConfig.addCollection("posts", function (collectionApi) {

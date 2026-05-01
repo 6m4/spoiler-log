@@ -1,0 +1,34 @@
+---
+layout: base.njk
+showHomeLink: false
+---
+
+{% set postBackHref = page | postBackUrl(work, collections) | url %}
+
+<h1>{{ work | workName }}</h1>
+
+<article class="post post-single spoiler-gated" id="{{ page | postAnchor }}" data-spoiler-gate>
+  <div class="spoiler-content">
+    {{ content | safe }}
+    <time datetime="{{ date.toISOString() }}">
+      {{ date.toLocaleString("ja-JP", {
+        timeZone: "Asia/Tokyo",
+        year: "numeric",
+        month: "numeric",
+        day: "numeric",
+        hour: "2-digit",
+        minute: "2-digit",
+        hourCycle: "h23"
+      }) }}
+    </time>
+  </div>
+
+  <div class="spoiler-cover">
+    <p>この投稿には作品のネタバレが含まれます。</p>
+    <button type="button" class="spoiler-open-button">ネタバレを表示</button>
+  </div>
+</article>
+
+<p class="home-link">
+  <a href="{{ postBackHref }}">作品ページのこの投稿へ戻る</a>
+</p>

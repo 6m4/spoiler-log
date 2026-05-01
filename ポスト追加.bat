@@ -10,6 +10,7 @@ for /f "delims=" %%i in ('powershell -NoProfile -ExecutionPolicy Bypass -Command
 
 set "OUTDIR=%~dp0src\posts"
 set "BASENAME=%STAMP%-%WORK_SLUG%"
+set "IMAGE_FILENAME=%BASENAME%.jpg"
 set "FILE=%OUTDIR%\%BASENAME%.md"
 
 if not exist "%OUTDIR%" mkdir "%OUTDIR%"
@@ -24,13 +25,16 @@ echo ---
 echo.
 echo Write here.
 echo.
-echo ^![](/images/%BASENAME%.jpg^)
+echo ^![](/images/%IMAGE_FILENAME%^)
 echo.
 echo ^<!-- {%% youtube "https://www.youtube.com/watch?v=xxxxxxxxxxx" %%} --^>
 ) > "%FILE%"
 
 if not exist "%~dp0src\images" mkdir "%~dp0src\images"
 
+echo %IMAGE_FILENAME%| clip
+
 echo Created: %FILE%
+echo Copied image filename: %IMAGE_FILENAME%
 start "" "%FILE%"
 start "" "%~dp0src\images"

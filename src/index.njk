@@ -11,6 +11,11 @@ showHomeLink: false
   {% for work in collections.workSummaries %}
     <li>
       <a href="{{ ('/works/' ~ work.slug ~ '/') | url }}">
+        {% if work.cardImage %}
+          <span class="work-thumb">
+            <img src="{{ work.cardImage | url }}" alt="">
+          </span>
+        {% endif %}
         <span class="work-main">
           <strong>{{ work.name }}</strong>
           <span class="work-meta">
