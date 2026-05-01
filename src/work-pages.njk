@@ -50,7 +50,7 @@ permalink: "{{ pageDef.permalink }}"
   {% for post in posts %}
     <article class="post" id="{{ post | postAnchor }}">
       {{ post.templateContent | safe }}
-      <a class="post-time-link" href="{{ post | postUrl | url }}">
+      <a class="post-time-link" href="{{ ((post | postUrl) ~ '?from=work') | url }}">
         <time datetime="{{ post.date.toISOString() }}">
           {{ post.date.toLocaleString("ja-JP", {
             timeZone: "Asia/Tokyo",

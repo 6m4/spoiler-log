@@ -63,10 +63,11 @@
     });
 
     const spoilerGateStorageKey = "spoiler-log-gate-open";
+    const shouldSkipSpoilerGate = new URLSearchParams(location.search).get("from") === "work";
 
     document.querySelectorAll("[data-spoiler-gate]").forEach(function (gate) {
       try {
-        if (sessionStorage.getItem(spoilerGateStorageKey) === "true") {
+        if (shouldSkipSpoilerGate || sessionStorage.getItem(spoilerGateStorageKey) === "true") {
           gate.classList.add("is-open");
         }
       } catch (e) {}
