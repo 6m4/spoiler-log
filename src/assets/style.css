@@ -43,6 +43,15 @@ a {
   font-size: 0.95rem;
 }
 
+.post-back-link {
+  margin: 16px 0 72px;
+}
+
+.post-back-link a {
+  display: inline-block;
+  padding: 10px 0;
+}
+
 .work-list {
   list-style: none;
   padding: 0;
