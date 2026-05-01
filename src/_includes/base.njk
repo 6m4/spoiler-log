@@ -23,7 +23,7 @@
     <meta property="og:image" content="{{ cardImage | absoluteUrl(site) }}">
     <meta name="twitter:image" content="{{ cardImage | absoluteUrl(site) }}">
   {% endif %}
-  <link rel="stylesheet" href="{{ '/assets/style.css' | url }}">
+  <link rel="stylesheet" href="{{ '/assets/style.css' | url }}?v={{ site.assetVersion }}">
 </head>
 <body>
   <main class="wrap">
