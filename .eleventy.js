@@ -125,6 +125,10 @@ module.exports = function (eleventyConfig) {
     return `${site.url.replace(/\/$/, "")}${prefixedUrl}`;
   });
 
+  eleventyConfig.addFilter("encodeURIComponent", function (value) {
+    return encodeURIComponent(value || "");
+  });
+
   eleventyConfig.addFilter("postBackUrl", function (post, workSlug, collections) {
     const postId = getPostId(post);
     const posts = collections[`work_${workSlug}`] || [];

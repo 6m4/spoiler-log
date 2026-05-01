@@ -4,6 +4,8 @@ showHomeLink: false
 ---
 
 {% set postBackHref = page | postBackUrl(work, collections) | url %}
+{% set postAbsoluteUrl = page.url | absoluteUrl(site) %}
+{% set xPostHref = "https://twitter.com/intent/tweet?text=" ~ ("ネタバレ注意" | encodeURIComponent) ~ "&url=" ~ (postAbsoluteUrl | encodeURIComponent) %}
 
 <h1>{{ work | workName }}</h1>
 
@@ -29,6 +31,7 @@ showHomeLink: false
   </div>
 </article>
 
-<p class="home-link post-back-link">
+<p class="home-link post-actions post-back-link">
   <a href="{{ postBackHref }}">作品ページのこの投稿へ戻る</a>
+  <a href="{{ xPostHref }}" target="_blank" rel="noopener noreferrer">Xへ投稿</a>
 </p>

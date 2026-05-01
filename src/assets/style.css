@@ -52,6 +52,18 @@ a {
   padding: 10px 0;
 }
 
+.post-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.post-actions a:last-child {
+  margin-left: auto;
+  white-space: nowrap;
+}
+
 .work-list {
   list-style: none;
   padding: 0;
