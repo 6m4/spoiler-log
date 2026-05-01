@@ -18,7 +18,7 @@
   <meta name="twitter:title" content="作品一覧">
   <meta name="twitter:description" content="食べ食べのネタバレツイート置き場">
   
-  <link rel="stylesheet" href="/spoiler-log/assets/style.css?v=20260501-2">
+  <link rel="stylesheet" href="/spoiler-log/assets/style.css?v=20260501-3">
 </head>
 <body>
   <main class="wrap">
@@ -124,6 +124,27 @@
         } catch (e) {}
       });
     });
+
+    const hashTarget = location.hash ? document.getElementById(decodeURIComponent(location.hash.slice(1))) : null;
+
+    if (hashTarget) {
+      const scrollToHashTarget = function () {
+        hashTarget.scrollIntoView({ block: "start" });
+      };
+
+      requestAnimationFrame(scrollToHashTarget);
+      [120, 400, 900, 1600].forEach(function (delay) {
+        window.setTimeout(scrollToHashTarget, delay);
+      });
+      window.addEventListener("load", scrollToHashTarget, { once: true });
+
+      document.querySelectorAll("img").forEach(function (img) {
+        if (!img.complete) {
+          img.addEventListener("load", scrollToHashTarget, { once: true });
+          img.addEventListener("error", scrollToHashTarget, { once: true });
+        }
+      });
+    }
 
     function closeLightbox() {
       const lightbox = document.getElementById("lightbox");

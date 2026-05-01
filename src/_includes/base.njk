@@ -83,6 +83,27 @@
       });
     });
 
+    const hashTarget = location.hash ? document.getElementById(decodeURIComponent(location.hash.slice(1))) : null;
+
+    if (hashTarget) {
+      const scrollToHashTarget = function () {
+        hashTarget.scrollIntoView({ block: "start" });
+      };
+
+      requestAnimationFrame(scrollToHashTarget);
+      [120, 400, 900, 1600].forEach(function (delay) {
+        window.setTimeout(scrollToHashTarget, delay);
+      });
+      window.addEventListener("load", scrollToHashTarget, { once: true });
+
+      document.querySelectorAll("img").forEach(function (img) {
+        if (!img.complete) {
+          img.addEventListener("load", scrollToHashTarget, { once: true });
+          img.addEventListener("error", scrollToHashTarget, { once: true });
+        }
+      });
+    }
+
     function closeLightbox() {
       const lightbox = document.getElementById("lightbox");
       const lightboxImage = document.getElementById("lightbox-image");
