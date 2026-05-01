@@ -1,4 +1,17 @@
 [
-  { "name": "パラノマサイト FILE38 伊勢人魚物語", "slug": "paranomaise", "cardImage": "/images/cards/paranomaise.jpg" },
-  { "name": "LIVE A LIVE（SFC版 初見）", "slug": "livealive", "cardImage": "/images/cards/livealive.jpg" }
+  {
+    "name": "パラノマサイト FILE38 伊勢人魚物語",
+    "slug": "paranomaise",
+    "cardImage": "/images/cards/paranomaise.jpg"
+  },
+  {
+    "name": "LIVE A LIVE（SFC版 初見）",
+    "slug": "livealive",
+    "cardImage": "/images/cards/livealive.jpg"
+  },
+  {
+    "name": "LIVE A LIV（リメイク版）",
+    "slug": "livealiveremake",
+    "cardImage": "/images/cards/livealiveremake.jpg"
+  }
 ]
