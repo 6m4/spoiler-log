@@ -131,12 +131,11 @@ module.exports = function (eleventyConfig) {
   });
 
   eleventyConfig.addFilter("postBackUrl", function (post, workSlug, collections) {
-    const postId = getPostId(post);
     const posts = collections[`work_${workSlug}`] || [];
-    const index = posts.findIndex((item) => getPostId(item) === postId);
+    const index = posts.findIndex((item) => getPostId(item) === getPostId(post));
     const pageNumber = index >= 0 ? Math.floor(index / postsPerWorkPage) + 1 : 1;
 
-    return `${getWorkPageUrl(workSlug, pageNumber)}#post-${postId}`;
+    return getWorkPageUrl(workSlug, pageNumber);
   });
 
   eleventyConfig.addCollection("posts", function (collectionApi) {
