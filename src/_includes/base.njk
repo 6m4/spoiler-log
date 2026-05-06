@@ -7,10 +7,7 @@
   {% set pageTitle %}{% if title %}{{ title }}{% elif work %}{{ work | workName }}{% else %}{{ site.name }}{% endif %}{% endset %}
   {% set cardTitle %}{% if work %}ネタバレ注意 | {{ work | workName }}{% else %}{{ pageTitle }}{% endif %}{% endset %}
   {% set cardDescription = "食べ食べのネタバレツイート置き場" %}
-  {% set cardImage = "" %}
-  {% if work %}
-    {% set cardImage = work | workCardImage %}
-  {% endif %}
+  {% set cardImage = site.cardImage or "" %}
   <title>{% if pageTitle != site.name %}{{ pageTitle }} | {% endif %}{{ site.name }}</title>
   <meta property="og:title" content="{{ cardTitle | trim }}">
   <meta property="og:description" content="{{ cardDescription }}">

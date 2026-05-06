@@ -1,5 +1,6 @@
 const works = require("./src/_data/works.json");
 const pathPrefix = "/spoiler-log/";
+const postsPerWorkPage = 20;
 
 function getYouTubeId(url) {
   try {
@@ -133,7 +134,7 @@ module.exports = function (eleventyConfig) {
     const postId = getPostId(post);
     const posts = collections[`work_${workSlug}`] || [];
     const index = posts.findIndex((item) => getPostId(item) === postId);
-    const pageNumber = index >= 0 ? Math.floor(index / 30) + 1 : 1;
+    const pageNumber = index >= 0 ? Math.floor(index / postsPerWorkPage) + 1 : 1;
 
     return `${getWorkPageUrl(workSlug, pageNumber)}#post-${postId}`;
   });
@@ -165,7 +166,7 @@ module.exports = function (eleventyConfig) {
         .slice()
         .sort((a, b) => new Date(b.date) - new Date(a.date));
 
-      const totalPages = Math.max(1, Math.ceil(items.length / 30));
+      const totalPages = Math.max(1, Math.ceil(items.length / postsPerWorkPage));
 
       for (let page = 1; page <= totalPages; page++) {
         defs.push({
@@ -173,8 +174,8 @@ module.exports = function (eleventyConfig) {
           name: work.name,
           pageNumber: page,
           totalPages,
-          start: (page - 1) * 30,
-          end: page * 30,
+          start: (page - 1) * postsPerWorkPage,
+          end: page * postsPerWorkPage,
           permalink:
             page === 1
               ? `/works/${work.slug}/`
