@@ -4,8 +4,17 @@ title: 作品一覧
 showHomeLink: false
 ---
 
-<h1>食べ食べのネタバレツイート置き場</h1>
+{% if site.indexImage %}
+  <p class="index-image">
+    <img src="{{ site.indexImage | url }}" alt="">
+  </p>
+{% endif %}
+
+<h1 class="index-title">食べ食べのネタバレツイート置き場</h1>
 <p class="spoiler-note">⚠ ネタバレ注意 ⚠</p>
+{% if site.indexDescription %}
+  <p class="index-description">{{ site.indexDescription }}</p>
+{% endif %}
 
 <ul class="work-list">
   {% for work in collections.workSummaries %}
