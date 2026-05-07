@@ -13,5 +13,10 @@
     "name": "LIVE A LIVE（リメイク版）",
     "slug": "livealiveremake",
     "cardImage": "/images/cards/livealiveremake.jpg"
+  },
+  {
+    "name": "TitaniumCourt",
+    "slug": "titaniumcourt",
+    "cardImage": "/images/cards/titaniumcourt.jpg"
   }
 ]
