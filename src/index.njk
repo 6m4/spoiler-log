@@ -11,7 +11,7 @@ showHomeLink: false
 {% endif %}
 
 <h1 class="index-title">食べ食べのネタバレツイート置き場</h1>
-<p class="spoiler-note">⚠ リンク先ネタバレ注意 ⚠</p>
+<p class="spoiler-note">⚠ ネタバレ注意 ⚠</p>
 {% if site.indexDescription %}
   <p class="index-description">{{ site.indexDescription }}</p>
 {% endif %}
@@ -39,6 +39,23 @@ showHomeLink: false
               まだ投稿なし
             {% endif %}
           </span>
+        </span>
+      </a>
+    </li>
+  {% endfor %}
+  {% for link in site.indexLinks %}
+    <li>
+      <a href="{{ link.url }}">
+        {% if link.image %}
+          <span class="work-thumb">
+            <img src="{{ link.image | url }}" alt="">
+          </span>
+        {% endif %}
+        <span class="work-main">
+          <strong>{{ link.title }}</strong>
+          {% if link.description %}
+            <span class="work-meta">{{ link.description }}</span>
+          {% endif %}
         </span>
       </a>
     </li>
