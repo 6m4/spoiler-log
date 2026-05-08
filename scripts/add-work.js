@@ -37,7 +37,7 @@ async function main() {
 
   const cardImage = `/images/cards/${slug}.jpg`;
 
-  works.push({
+  works.unshift({
     name,
     slug,
     cardImage,

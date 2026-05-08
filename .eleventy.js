@@ -200,11 +200,6 @@ module.exports = function (eleventyConfig) {
           count: posts.length,
           latestPost: posts[0] || null,
         };
-      })
-      .sort((a, b) => {
-        const aTime = a.latestPost ? new Date(a.latestPost.date).getTime() : 0;
-        const bTime = b.latestPost ? new Date(b.latestPost.date).getTime() : 0;
-        return bTime - aTime;
       });
   });
 
