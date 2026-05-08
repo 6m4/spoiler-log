@@ -1,13 +1,8 @@
 [
   {
-    "name": "パラノマサイト FILE38 伊勢人魚物語",
-    "slug": "paranomaise",
-    "cardImage": "/images/cards/paranomaise.jpg"
-  },
-  {
-    "name": "LIVE A LIVE（SFC版 初見）",
-    "slug": "livealive",
-    "cardImage": "/images/cards/livealive.jpg"
+    "name": "TitaniumCourt",
+    "slug": "titaniumcourt",
+    "cardImage": "/images/cards/titaniumcourt.jpg"
   },
   {
     "name": "LIVE A LIVE（リメイク版）",
@@ -15,8 +10,13 @@
     "cardImage": "/images/cards/livealiveremake.jpg"
   },
   {
-    "name": "TitaniumCourt",
-    "slug": "titaniumcourt",
-    "cardImage": "/images/cards/titaniumcourt.jpg"
+    "name": "LIVE A LIVE（SFC版 初見）",
+    "slug": "livealive",
+    "cardImage": "/images/cards/livealive.jpg"
+  },
+  {
+    "name": "パラノマサイト FILE38 伊勢人魚物語",
+    "slug": "paranomaise",
+    "cardImage": "/images/cards/paranomaise.jpg"
   }
 ]
