@@ -3,19 +3,25 @@
   "url": "https://6m4.github.io",
   "cardImage": "/images/cards/site-card.jpg",
   "indexImage": "/images/index-image.png",
-  "indexDescription": "Twitterに投稿できないようなネタバレありの感想を作品ごとに分けて保管しています。リンク先はネタバレに配慮していないのでご注意ください。",
+  "indexDescription": "Twitterに投稿できないようなネタバレありの感想を作品ごとに分けて保管しています。リンク先もネタバレに配慮していないのでご注意ください。",
   "indexLinks": [
+    {
+      "title": "【リンク】note",
+      "url": "https://note.com/tabetabe_usagi",
+      "description": "いろいろ",
+      "image": "/images/links/link-1.png"
+    },
     {
       "title": "【リンク】しずかなインターネット",
       "url": "https://sizu.me/tabetabe",
       "description": "Blue Princeとか",
-      "image": "/images/links/link-1.png"
+      "image": "/images/links/link-2.png"
     },
     {
       "title": "【リンク】Privatter+",
       "url": "https://privatter.me/user/8m410",
       "description": "Void Strangerとか",
-      "image": "/images/links/link-2.png"
+      "image": "/images/links/link-3.png"
     }
   ],
   "assetVersion": "20260501-7"
