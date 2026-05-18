@@ -10,8 +10,8 @@ showHomeLink: false
   </p>
 {% endif %}
 
-<h1 class="index-title">食べ食べのゲームとかの感想置き場</h1>
-<p class="spoiler-note">⚠ リンク先ネタバレ注意 ⚠</p>
+<h1 class="index-title">食べ食べのネタバレツイート置き場</h1>
+<p class="spoiler-note">⚠ ネタバレ注意 ⚠</p>
 {% if site.indexDescription %}
   <p class="index-description">{{ site.indexDescription }}</p>
 {% endif %}
@@ -20,11 +20,6 @@ showHomeLink: false
   {% for work in collections.workSummaries %}
     <li>
       <a href="{{ ('/works/' ~ work.slug ~ '/') | url }}">
-        {% if work.cardImage %}
-          <span class="work-thumb">
-            <img src="{{ work.cardImage | url }}" alt="">
-          </span>
-        {% endif %}
         <span class="work-main">
           <strong>{{ work.name }}</strong>
           <span class="work-meta">
@@ -46,11 +41,6 @@ showHomeLink: false
   {% for link in site.indexLinks %}
     <li>
       <a href="{{ link.url }}">
-        {% if link.image %}
-          <span class="work-thumb">
-            <img src="{{ link.image | url }}" alt="">
-          </span>
-        {% endif %}
         <span class="work-main">
           <strong>{{ link.title }}</strong>
           {% if link.description %}
