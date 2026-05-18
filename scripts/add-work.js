@@ -4,7 +4,6 @@ const readline = require("readline");
 
 const root = path.resolve(__dirname, "..");
 const worksPath = path.join(root, "src", "_data", "works.json");
-const cardsDir = path.join(root, "src", "images", "cards");
 
 const rl = readline.createInterface({
   input: process.stdin,
@@ -35,25 +34,19 @@ async function main() {
     throw new Error(`Work slug already exists: ${slug}`);
   }
 
-  const cardImage = `/images/cards/${slug}.jpg`;
-
   works.unshift({
     name,
     slug,
-    cardImage,
   });
 
   fs.writeFileSync(worksPath, `${JSON.stringify(works, null, 2)}\n`, "utf8");
-  fs.mkdirSync(cardsDir, { recursive: true });
 
   console.log("");
   console.log("Added work:");
   console.log(`  name: ${name}`);
   console.log(`  slug: ${slug}`);
-  console.log(`  card image: ${cardImage}`);
   console.log("");
   console.log("Next:");
-  console.log(`  Put the card image here: src\\images\\cards\\${slug}.jpg`);
   console.log("  If you will add posts for this work, update WORK_SLUG in the post-add batch file.");
 }
 

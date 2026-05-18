@@ -108,11 +108,6 @@ module.exports = function (eleventyConfig) {
     return work ? work.name : workSlug;
   });
 
-  eleventyConfig.addFilter("workCardImage", function (workSlug) {
-    const work = works.find((item) => item.slug === workSlug);
-    return work?.cardImage || "";
-  });
-
   eleventyConfig.addFilter("absoluteUrl", function (url, site) {
     const normalizedUrl = url || "/";
     const prefixedUrl = normalizedUrl.startsWith(pathPrefix)

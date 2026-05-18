@@ -13,10 +13,6 @@ node scripts\add-work.js
 if errorlevel 1 goto :error
 
 echo.
-echo Opening card image folder...
-start "" "%~dp0src\images\cards"
-
-echo.
 echo Done
 pause
 exit /b
